@@ -90,3 +90,32 @@ async def ask_location(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(keyboard=button, resize_keyboard=True)
     await message.answer("Lokatsiyani jo'nating", reply_markup=keyboard)
     print(user_data)
+    async def info_location(message: types.Message):
+    user_id = message.from_user.id
+    if message.location is not None:
+        latitude = message.location.latitude
+        longitude = message.location.longitude
+        location = {
+            "latitude": latitude,
+            "longitude": longitude
+        }
+    else:
+        location = message.text
+    user_data[user_id]["location"] = location
+    button = [
+        [types.KeyboardButton(text="Boshlash")]
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=button, resize_keyboard=True)
+    user_data[user_id]["holat"] = "kategoriyalar"
+    await message.answer("Boshladikmi", reply_markup=keyboard)
+    print(user_data)
+
+
+city = [
+    "Toshkent", "Andijon",
+    "Samarqand", "Farg'ona",
+    "Buxoro", "Marg'ilon",
+    "Nukus", "Xorazm",
+    "Chirchiq"
+]
+
