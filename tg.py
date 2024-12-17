@@ -118,4 +118,28 @@ city = [
     "Nukus", "Xorazm",
     "Chirchiq"
 ]
+async def show_city(message: types.Message):
+    user_id = message.from_user.id
+    if message.text == "Boshlash":
+        buttons = []
+        for cities in city:
+            button = [types.KeyboardButton(text=cities)]
+            buttons.append(button)
+        keyboard = types.ReplyKeyboardMarkup(keyboard=buttons, resize_keyboard=True)
+        user_data[user_id]["holat"] = "kategoriyalar_1"
+        await message.answer(f"Qaysi shaharda yashaysiz \nIltimos,shaharni tanlang:", reply_markup=keyboard)
+    else:
+        pass
+    print(user_data)
+
+
+
+
+
+async  def main():
+    await dp.start_polling(bot)
+
+print('The bot is running')
+asyncio.run(main())
+
 
